@@ -18,11 +18,7 @@ abstract class _ThemeStore with Store {
 
   // store variables:-----------------------------------------------------------
   @observable
-  bool _darkMode = false;
-
-
-  // getters:-------------------------------------------------------------------
-  bool get darkMode => _darkMode;
+  bool darkMode = false;
 
   // constructor:---------------------------------------------------------------
   _ThemeStore(Repository repository)
@@ -33,13 +29,13 @@ abstract class _ThemeStore with Store {
   // actions:-------------------------------------------------------------------
   @action
   Future changeBrightnessToDark(bool value) async {
-    _darkMode = value;
+    darkMode = value;
     await _repository.changeBrightnessToDark(value);
   }
 
   // general methods:-----------------------------------------------------------
   Future init() async {
-    _darkMode = await _repository?.isDarkMode ?? false;
+    darkMode = await _repository?.isDarkMode ?? false;
   }
 
   bool isPlatformDark(BuildContext context) =>

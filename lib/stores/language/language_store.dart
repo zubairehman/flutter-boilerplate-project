@@ -31,15 +31,15 @@ abstract class _LanguageStore with Store {
 
   // store variables:-----------------------------------------------------------
   @observable
-  String _locale = "en";
+  String locale = "en";
 
-  @computed
-  String get locale => _locale;
+//  @computed
+//  String get locale => _locale;
 
   // actions:-------------------------------------------------------------------
   @action
   void changeLanguage(String value) {
-    _locale = value;
+    locale = value;
     _repository.changeLanguage(value).then((_) {
       // write additional logic here
     });
@@ -49,11 +49,11 @@ abstract class _LanguageStore with Store {
   String getCode() {
     var code;
 
-    if (_locale == 'en') {
+    if (locale == 'en') {
       code = "US";
-    } else if (_locale == 'da') {
+    } else if (locale == 'da') {
       code = "DK";
-    } else if (_locale == 'es') {
+    } else if (locale == 'es') {
       code = "ES";
     }
 
@@ -63,7 +63,7 @@ abstract class _LanguageStore with Store {
   @action
   String getLanguage() {
     return supportedLanguages[supportedLanguages
-            .indexWhere((language) => language.locale == _locale)]
+            .indexWhere((language) => language.locale == locale)]
         .language;
   }
 
@@ -72,7 +72,7 @@ abstract class _LanguageStore with Store {
     // getting current language from shared preference
     _repository?.currentLanguage?.then((locale) {
       if (locale != null) {
-        _locale = locale;
+        this.locale = locale;
       }
     });
   }
